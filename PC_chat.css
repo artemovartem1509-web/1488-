@@ -1,0 +1,333 @@
+/* =========================
+   RESET
+========================= */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
+}
+
+body{
+    background:#d9d9d9;
+    overflow:hidden;
+}
+
+/* =========================
+   REGISTRATION
+========================= */
+
+#registration-screen{
+    width:100%;
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+.registration-card{
+    width:420px;
+    background:#f3f1f1;
+    padding:35px;
+    border-radius:20px;
+}
+
+.input-group{
+    margin-bottom:18px;
+}
+
+.input-field{
+    width:100%;
+    height:58px;
+    border:none;
+    outline:none;
+    border-radius:14px;
+    background:#dddddd;
+    padding:0 18px;
+    font-size:18px;
+}
+
+.input-field::placeholder{
+    color:#777;
+}
+
+.terms-container{
+    display:flex;
+    align-items:flex-start;
+    gap:12px;
+    margin:14px 0;
+}
+
+.terms-container input{
+    width:20px;
+    height:20px;
+}
+
+.terms-text{
+    font-size:14px;
+    color:#777;
+    font-weight:600;
+    line-height:1.4;
+}
+
+.submit-btn{
+    width:100%;
+    height:58px;
+    border:none;
+    border-radius:15px;
+    background:#57c84d;
+    color:white;
+    font-size:24px;
+    font-weight:bold;
+    cursor:pointer;
+    margin-top:10px;
+    transition:0.3s;
+}
+
+.submit-btn:hover{
+    background:#4db142;
+}
+
+.error-message{
+    color:red;
+    font-size:14px;
+    margin-bottom:12px;
+    display:none;
+}
+
+/* =========================
+   CHAT
+========================= */
+
+#chat-screen{
+    display:none;
+    width:100%;
+    height:100vh;
+}
+
+#chat-screen.visible{
+    display:flex;
+}
+
+/* =========================
+   LEFT PANEL
+========================= */
+
+aside{
+    width:35%;
+    border-right:1px solid #c7c7c7;
+    padding:18px;
+}
+
+.sidebar-header{
+    display:flex;
+    align-items:center;
+    gap:18px;
+}
+
+.menu-icon{
+    width:32px;
+    cursor:pointer;
+}
+
+.menu-icon span{
+    display:block;
+    width:100%;
+    height:4px;
+    background:#333;
+    margin:5px 0;
+    border-radius:3px;
+}
+
+.search-box{
+    flex:1;
+    height:42px;
+    border:none;
+    border-radius:14px;
+    background:#f3f3f3;
+    padding:0 15px;
+    outline:none;
+    font-size:16px;
+}
+
+.chat-list{
+    margin-top:40px;
+}
+
+.chat-item{
+    display:flex;
+    align-items:center;
+    margin-bottom:40px;
+    cursor:pointer;
+}
+
+.avatar{
+    width:70px;
+    height:70px;
+    border-radius:50%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    color:white;
+    font-size:28px;
+    font-weight:bold;
+    margin-right:15px;
+}
+
+.avatar-red{
+    background:#ff6b6b;
+}
+
+.avatar-pink{
+    background:#ff8fc4;
+}
+
+.chat-info{
+    flex:1;
+}
+
+.chat-top-row{
+    display:flex;
+    justify-content:space-between;
+    margin-bottom:6px;
+}
+
+.chat-title{
+    font-size:22px;
+    font-weight:bold;
+}
+
+.chat-time{
+    font-size:15px;
+    color:#444;
+}
+
+.chat-preview{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.chat-sub{
+    font-size:17px;
+    font-weight:600;
+}
+
+.chat-unread-badge{
+    min-width:24px;
+    height:24px;
+    border-radius:50%;
+    background:#58c44d;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    color:white;
+    font-size:13px;
+}
+
+/* =========================
+   RIGHT PANEL
+========================= */
+
+main{
+    flex:1;
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
+    padding:20px;
+}
+
+.chat-header{
+    text-align:center;
+}
+
+.chat-header .avatar{
+    margin:0 auto 12px;
+}
+
+.chat-header-title{
+    font-size:28px;
+    font-weight:bold;
+    margin-bottom:10px;
+}
+
+.message-area{
+    flex:1;
+    overflow-y:auto;
+    padding:20px 0;
+}
+
+.message-row{
+    display:flex;
+    margin-bottom:18px;
+}
+
+.message-row.left{
+    justify-content:flex-start;
+}
+
+.message-row.right{
+    justify-content:flex-end;
+}
+
+.bubble{
+    padding:14px 18px;
+    border-radius:18px;
+    max-width:320px;
+    font-size:18px;
+    font-weight:600;
+}
+
+.bubble.left{
+    background:#a9c7ff;
+}
+
+.bubble.right{
+    background:#f6f6f6;
+}
+
+.msg-time{
+    font-size:12px;
+    color:#444;
+    margin-left:8px;
+}
+
+/* =========================
+   INPUT AREA
+========================= */
+
+.input-area{
+    padding-top:10px;
+}
+
+.input-box{
+    background:#f6f2f2;
+    border:1px solid #555;
+    border-radius:22px;
+    display:flex;
+    align-items:center;
+    padding:10px 15px;
+}
+
+.input-box input{
+    flex:1;
+    border:none;
+    background:transparent;
+    outline:none;
+    font-size:22px;
+    margin:0 12px;
+}
+
+.input-tools{
+    display:flex;
+    gap:12px;
+}
+
+/* =========================
+   HELPERS
+========================= */
+
+.hidden{
+    display:none !important;
+}
