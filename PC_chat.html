@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Регистрация и чат</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
+}
+
+body{
+    background:#d9d9d9;
+    overflow:hidden;
+}
+
+/* =========================
+   REGISTRATION
+========================= */
+
+#registration-screen{
+    width:100%;
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+.registration-card{
+    width:420px;
+    background:#f3f1f1;
+    padding:35px;
+    border-radius:20px;
+}
+
+.input-group{
+    margin-bottom:18px;
+}
+
+.input-field{
+    width:100%;
+    height:58px;
+    border:none;
+    outline:none;
+    border-radius:14px;
+    background:#dddddd;
+    padding:0 18px;
+    font-size:18px;
+}
+
+.input-field::placeholder{
+    color:#777;
+}
+
+.terms-container{
+    display:flex;
+    align-items:flex-start;
+    gap:12px;
+    margin:14px 0;
+}
+
+.terms-container input{
+    width:20px;
+    height:20px;
+}
+
+.terms-text{
+    font-size:14px;
+    color:#777;
+    font-weight:600;
+    line-height:1.4;
+}
+
+.submit-btn{
+    width:100%;
+    height:58px;
+    border:none;
+    border-radius:15px;
+    background:#57c84d;
+    color:white;
+    font-size:24px;
+    font-weight:bold;
+    cursor:pointer;
+    margin-top:10px;
+}
+
+.submit-btn:hover{
+    background:#4db142;
+}
+
+.error-message{
+    color:red;
+    font-size:14px;
+    margin-bottom:12px;
+    display:none;
+}
+
+/* =========================
+   CHAT
+========================= */
+
+#chat-screen{
+    display:none;
+    width:100%;
+    height:100vh;
+}
+
+#chat-screen.visible{
+    display:flex;
+}
+
+/* LEFT PANEL */
+
+aside{
+    width:35%;
+    border-right:1px solid #c7c7c7;
+    padding:18px;
+}
+
+.sidebar-header{
+    display:flex;
+    align-items:center;
+    gap:18px;
+}
+
+.menu-icon{
+    width:32px;
+    cursor:pointer;
+}
+
+.menu-icon span{
+    display:block;
+    width:100%;
+    height:4px;
+    background:#333;
+    margin:5px 0;
+    border-radius:3px;
+}
+
+.search-box{
+    flex:1;
+    height:42px;
+    border:none;
+    border-radius:14px;
+    background:#f3f3f3;
+    padding:0 15px;
+    outline:none;
+    font-size:16px;
+}
+
+.chat-list{
+    margin-top:40px;
+}
+
+.chat-item{
+    display:flex;
+    align-items:center;
+    margin-bottom:40px;
+    cursor:pointer;
+}
+
+.avatar{
+    width:70px;
+    height:70px;
+    border-radius:50%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    color:white;
+    font-size:28px;
+    font-weight:bold;
+    margin-right:15px;
+}
+
+.avatar-red{
+    background:#ff6b6b;
+}
+
+.avatar-pink{
+    background:#ff8fc4;
+}
+
+.chat-info{
+    flex:1;
+}
+
+.chat-top-row{
+    display:flex;
+    justify-content:space-between;
+    margin-bottom:6px;
+}
+
+.chat-title{
+    font-size:22px;
+    font-weight:bold;
+}
+
+.chat-time{
+    font-size:15px;
+    color:#444;
+}
+
+.chat-preview{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.chat-sub{
+    font-size:17px;
+    font-weight:600;
+}
+
+.chat-unread-badge{
+    min-width:24px;
+    height:24px;
+    border-radius:50%;
+    background:#58c44d;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    color:white;
+    font-size:13px;
+}
+
+/* RIGHT PANEL */
+
+main{
+    flex:1;
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
+    padding:20px;
+}
+
+.chat-header{
+    text-align:center;
+}
+
+.chat-header .avatar{
+    margin:0 auto 12px;
+}
+
+.chat-header-title{
+    font-size:28px;
+    font-weight:bold;
+    margin-bottom:10px;
+}
+
+.message-area{
+    flex:1;
+    overflow-y:auto;
+    padding:20px 0;
+}
+
+.message-row{
+    display:flex;
+    margin-bottom:18px;
+}
+
+.message-row.left{
+    justify-content:flex-start;
+}
+
+.message-row.right{
+    justify-content:flex-end;
+}
+
+.bubble{
+    padding:14px 18px;
+    border-radius:18px;
+    max-width:320px;
+    font-size:18px;
+    font-weight:600;
+}
+
+.bubble.left{
+    background:#a9c7ff;
+}
+
+.bubble.right{
+    background:#f6f6f6;
+}
+
+.msg-time{
+    font-size:12px;
+    color:#444;
+    margin-left:8px;
+}
+
+/* INPUT */
+
+.input-area{
+    padding-top:10px;
+}
+
+.input-box{
+    background:#f6f2f2;
+    border:1px solid #555;
+    border-radius:22px;
+    display:flex;
+    align-items:center;
+    padding:10px 15px;
+}
+
+.input-box input{
+    flex:1;
+    border:none;
+    background:transparent;
+    outline:none;
+    font-size:22px;
+    margin:0 12px;
+}
+
+.input-tools{
+    display:flex;
+    gap:12px;
+}
+
+.hidden{
+    display:none !important;
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- REGISTRATION -->
+
+<div id="registration-screen">
+
+    <div class="registration-card">
+
+        <form id="registrationForm">
+
+            <div class="input-group">
+                <input type="text"
+                class="input-field"
+                id="fullname"
+                placeholder="Ф.И.О.">
+            </div>
+
+            <div class="input-group">
+                <input type="email"
+                class="input-field"
+                id="email"
+                placeholder="Email">
+            </div>
+
+            <div class="input-group">
+                <input type="tel"
+                class="input-field"
+                id="phone"
+                placeholder="Введите номер телефона">
+            </div>
+
+            <div class="terms-container">
+
+                <input type="checkbox" id="agreement">
+
+                <label for="agreement" class="terms-text">
+                    вы соглашаетесь с политикой конфиденциальности
+                </label>
+
+            </div>
+
+            <div class="terms-container">
+
+                <input type="checkbox" id="remember">
+
+                <label for="remember" class="terms-text">
+                    запомнить меня
+                </label>
+
+            </div>
+
+            <div id="errorMessage" class="error-message">
+                Заполните все поля
+            </div>
+
+            <button type="submit" class="submit-btn">
+                Зарегистрироваться
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+<!-- CHAT -->
+
+<div id="chat-screen">
+
+    <!-- LEFT -->
+
+    <aside>
+
+        <div class="sidebar-header">
+
+            <div class="menu-icon">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+
+            <input type="text"
+            class="search-box"
+            placeholder="Поиск чатов...">
+
+        </div>
+
+        <div class="chat-list">
+
+            <div class="chat-item">
+
+                <div class="avatar avatar-red">К</div>
+
+                <div class="chat-info">
+
+                    <div class="chat-top-row">
+                        <span class="chat-title">
+                            Кирилл трамп
+                        </span>
+
+                        <span class="chat-time">
+                            10 мая
+                        </span>
+                    </div>
+
+                    <div class="chat-preview">
+
+                        <span class="chat-sub">
+                            газ в буфет
+                        </span>
+
+                        <span class="chat-unread-badge">
+                            2
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="chat-item">
+
+                <div class="avatar avatar-pink">С</div>
+
+                <div class="chat-info">
+
+                    <div class="chat-top-row">
+                        <span class="chat-title">
+                            Серега гараж
+                        </span>
+
+                        <span class="chat-time">
+                            10 мая
+                        </span>
+                    </div>
+
+                    <div class="chat-preview">
+
+                        <span class="chat-sub">
+                            пошли на рыбалку
+                        </span>
+
+                        <span class="chat-unread-badge">
+                            1
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </aside>
+
+    <!-- RIGHT -->
+
+    <main>
+
+        <header class="chat-header">
+
+            <div class="avatar avatar-red">С</div>
+
+            <div class="chat-header-title">
+                Серега гараж
+            </div>
+
+            <div style="font-weight:bold;margin-bottom:20px;">
+                был(а) недавно
+            </div>
+
+            <div style="color:white;font-size:20px;">
+                30 апреля
+            </div>
+
+        </header>
+
+        <div class="message-area">
+
+            <div class="message-row left">
+
+                <div class="bubble left">
+                    ты сдал экз?
+                    <span class="msg-time">17:15</span>
+                </div>
+
+            </div>
+
+            <div class="message-row right">
+
+                <div class="bubble right">
+                    да
+                    <span class="msg-time">17:15</span>
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- INPUT -->
+
+        <div class="input-area">
+
+            <div class="input-box">
+
+                📎
+
+                <input type="text" placeholder="Сообщение">
+
+                <div class="input-tools">
+                    😊 🎤 ✈️
+                </div>
+
+            </div>
+
+        </div>
+
+    </main>
+
+</div>
+
+<script>
+
+const registrationForm =
+document.getElementById('registrationForm');
+
+const registrationScreen =
+document.getElementById('registration-screen');
+
+const chatScreen =
+document.getElementById('chat-screen');
+
+const errorMessage =
+document.getElementById('errorMessage');
+
+registrationForm.addEventListener('submit', function(e){
+
+    e.preventDefault();
+
+    const fullname =
+    document.getElementById('fullname').value;
+
+    const email =
+    document.getElementById('email').value;
+
+    const phone =
+    document.getElementById('phone').value;
+
+    const agreement =
+    document.getElementById('agreement').checked;
+
+    if(
+        fullname === '' ||
+        email === '' ||
+        phone === '' ||
+        !agreement
+    ){
+        errorMessage.style.display='block';
+        return;
+    }
+
+    registrationScreen.classList.add('hidden');
+
+    chatScreen.classList.add('visible');
+
+});
+
+</script>
+
+</body>
+</html>
